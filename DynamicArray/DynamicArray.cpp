@@ -1,26 +1,26 @@
 #include <iostream>
-#include <forward_list>
+#include <vector>
 using namespace std;
 
 
 int main()
 {
-    forward_list<int> list;
+    vector<int> nums = { 0,9,8,7,6,5,4,3,2,1 };
 
-    list.assign({0,9,8,7,6,5,4,3});
+    for (auto i = nums.begin(); i != nums.end(); ++i) {
+        for (auto j = i+1; j != nums.end(); ++j) {
+            if (*i > *j) {
+                int temp = *j;
+                *j = *i;
+                *i = temp;
+            }
 
-    forward_list<int>::iterator fast = list.begin();
-    forward_list<int>::iterator slow = list.begin();
-
-    /*auto fast = list.begin();
-    auto slow = list.begin();*/
-
-    while (next(fast) != list.end() && next(next(fast)) != list.end()) {
-        slow = next(slow);
-        fast = next(next(fast));
+        }
     }
 
-    cout << "value : " <<  *slow << endl;
+    for (int n : nums) {
+        cout << n << " ";
+    }
 }
 
 /*
