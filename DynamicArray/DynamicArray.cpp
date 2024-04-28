@@ -9,11 +9,11 @@ int main()
 
     list.assign({0,9,8,7,6,5,4,3});
 
-    /*forward_list<int>::iterator fast = list.begin();
-    forward_list<int>::iterator slow = list.begin();*/
+    forward_list<int>::iterator fast = list.begin();
+    forward_list<int>::iterator slow = list.begin();
 
-    auto fast = list.begin();
-    auto slow = list.begin();
+    /*auto fast = list.begin();
+    auto slow = list.begin();*/
 
     while (next(fast) != list.end() && next(next(fast)) != list.end()) {
         slow = next(slow);
