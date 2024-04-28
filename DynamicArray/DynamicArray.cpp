@@ -1,34 +1,33 @@
 #include <iostream>
-#include <chrono>
-#include <thread>
+#include <forward_list>
 using namespace std;
 
-enum TrafficLights {red=10, yellow= 15, green = 18 };
 
 int main()
 {
-    TrafficLights trafficLight = red;
+    forward_list<int> list;
 
-    while (true) {
-        if (trafficLight == red) {
-            cout << "Red: Please Stop" << endl;
-        }
-        this_thread::sleep_for(chrono::milliseconds(5000)); // 5 sec
-        trafficLight = yellow;
+    list.assign({0,9,8,7,6,5,4,3});
 
-        if (trafficLight == yellow) {
-            cout << "Yellow : Start Engine" << endl;
-        }
+    /*forward_list<int>::iterator fast = list.begin();
+    forward_list<int>::iterator slow = list.begin();*/
 
-        this_thread::sleep_for(chrono::milliseconds(3000)); // 3 sec
-        trafficLight = green;
+    auto fast = list.begin();
+    auto slow = list.begin();
 
-        if (trafficLight == green) {
-            cout << "Green : You are good to Go" << endl;
-        }
-
-        this_thread::sleep_for(chrono::milliseconds(5000)); // 5 sec
-        trafficLight = red;
+    while (next(fast) != list.end() && next(next(fast)) != list.end()) {
+        slow = next(slow);
+        fast = next(next(fast));
     }
 
+    cout << "value : " <<  *slow << endl;
 }
+
+/*
+Stack
+STL
+Files
+Streams
+
+
+*/
