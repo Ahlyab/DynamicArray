@@ -1,26 +1,27 @@
 #include <iostream>
-#include <vector>
+#include <stack>
 using namespace std;
 
 
 int main()
 {
-    vector<int> nums = { 0,9,8,7,6,5,4,3,2,1 };
+    stack<char> chars;
 
-    for (auto i = nums.begin(); i != nums.end(); ++i) {
-        for (auto j = i+1; j != nums.end(); ++j) {
-            if (*i > *j) {
-                int temp = *j;
-                *j = *i;
-                *i = temp;
-            }
+    string str = "Hello,World!";
 
-        }
+    for (char c : str) {
+        chars.push(c);
     }
 
-    for (int n : nums) {
-        cout << n << " ";
+    string reverse = "";
+
+    while (!chars.empty()) {
+        reverse += chars.top();
+        chars.pop();
     }
+
+    cout << "Str : " << str << endl;
+    cout << "Reversed : " << reverse << endl;
 }
 
 /*
@@ -28,6 +29,4 @@ Stack
 STL
 Files
 Streams
-
-
 */
