@@ -1,37 +1,31 @@
 #include <iostream>
-#include <vector>
-#include <set>
+#include <fstream>
+#include <string>
 using namespace std;
 
-class divideZeroException : public std::exception
-{
-public:
-    const char* what() const noexcept override
-    {
-        return "Denominator is ZERO";
-    }
-};
 
 int main()
 {
-    vector<int> arr = { 1, 2, 3, 4, 5 };
-    int a = 0, b = 0;
-    try
-    {
-        if (b == 0)
-        {
-            throw divideZeroException();
-        }
-        else
-        {
-            cout << a / b << endl;
-        }
+    // write into file
+    /*ofstream myFile("table.txt");
+
+    for (int i = 1; i <= 10; ++i) {
+        myFile << "2 X " << i << " = " << 2 * i << endl;
     }
-    catch (const exception& e)
-    {
-        cerr << e.what() << '\n';
-        // cout << "Idr araha ho" << endl;
+
+    myFile.close();*/
+
+    // read from file
+
+    ifstream file("table.txt");
+
+    string data;
+
+    while (file >> data) {
+        cout << data << endl;
     }
+
+    file.close();
 }
 
 /*
