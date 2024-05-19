@@ -3,29 +3,52 @@
 #include <string>
 using namespace std;
 
+class Person {
+public:
+    string name;
+    int age;
+
+    Person() :name{""}, age{0} {}
+    Person(string name, int age) : name{name}, age{age} {}
+
+    void serialize(string filename)  {
+        ofstream file(filename, ios::binary);
+
+        if (!file.is_open()) {
+            cout << "file does not exist";
+            return;
+        }
+
+        file.write(reinterpret_cast<char*>(this), sizeof(*this));
+        file.close();
+        cout << "Serialization Successful" << endl;
+    }
+
+    Person deserialize(string filename) {
+        Person obj;
+        ifstream file(filename, ios::binary);
+
+        if (!file.is_open()) {
+            cout << "file does not exist";
+            return obj;
+        }
+        
+        file.read(reinterpret_cast<char*>(&obj), sizeof(obj));
+        file.close();
+        cout << "deserialization Successful" << endl;
+
+        return obj;
+    }
+};
+
 
 int main()
 {
-    // write into file
-    /*ofstream myFile("table.txt");
+    Person person("Tayal", 79);
+    person.serialize("meow.bin");
+    Person afterDeserialize = person.deserialize("meow.bin");
 
-    for (int i = 1; i <= 10; ++i) {
-        myFile << "2 X " << i << " = " << 2 * i << endl;
-    }
-
-    myFile.close();*/
-
-    // read from file
-
-    ifstream file("table.txt");
-
-    string data;
-
-    while (file >> data) {
-        cout << data << endl;
-    }
-
-    file.close();
+    cout << afterDeserialize.name << " : " << afterDeserialize.age << endl;
 }
 
 /*
