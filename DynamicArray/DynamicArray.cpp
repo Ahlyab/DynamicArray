@@ -44,7 +44,7 @@ public:
 
 int main()
 {
-    Person person("Tayal", 79);
+    Person person("meow meow", 10);
     person.serialize("meow.bin");
     Person afterDeserialize = person.deserialize("meow.bin");
 
